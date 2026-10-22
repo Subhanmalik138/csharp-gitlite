@@ -6,12 +6,14 @@ sealed class Repository
     public string WorkTree { get; }
     public string GitDir { get; }
     public ObjectStore Objects { get; }
+    public Refs Refs { get; }
 
     private Repository(string workTree, string gitDir)
     {
         WorkTree = workTree;
         GitDir = gitDir;
         Objects = new ObjectStore(gitDir);
+        Refs = new Refs(gitDir);
     }
 
     /// <summary>Creates a fresh repository at <paramref name="path"/>.</summary>

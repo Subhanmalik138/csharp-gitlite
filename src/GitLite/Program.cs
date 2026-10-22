@@ -11,6 +11,9 @@ static class GitLiteApp
         ["init"] = InitCommand.Run,
         ["hash-object"] = HashObjectCommand.Run,
         ["cat-file"] = CatFileCommand.Run,
+        ["add"] = AddCommand.Run,
+        ["commit"] = CommitCommand.Run,
+        ["log"] = LogCommand.Run,
     };
 
     internal static int Run(string[] args)
