@@ -51,6 +51,8 @@ sealed class StagingArea
 
     public void Unstage(string path) => _entries.RemoveAll(e => e.Path == path);
 
+    public void Clear() => _entries.Clear();
+
     public void Save()
     {
         using var bw = new BinaryWriter(File.Create(_path));

@@ -14,6 +14,10 @@ static class GitLiteApp
         ["add"] = AddCommand.Run,
         ["commit"] = CommitCommand.Run,
         ["log"] = LogCommand.Run,
+        ["branch"] = BranchCommand.Run,
+        ["checkout"] = CheckoutCommand.Run,
+        ["status"] = StatusCommand.Run,
+        ["diff"] = DiffCommand.Run,
     };
 
     internal static int Run(string[] args)

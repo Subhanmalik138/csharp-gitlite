@@ -74,4 +74,25 @@ static class TreeBuilder
         }
         return entries;
     }
+
+    /// <summary>Flattens a tree into path → (mode, blob id), recursing into subtrees.</summary>
+    public static Dictionary<string, (int Mode, string Sha)> Flatten(ObjectStore store, string treeSha)
+    {
+        var result = new Dictionary<string, (int Mode, string Sha)>(StringComparer.Ordinal);
+        FlattenInto(store, treeSha, "", result);
+        return result;
+    }
+
+    private static void FlattenInto(ObjectStore store, string treeSha, string prefix,
+                                    Dictionary<string, (int Mode, string Sha)> acc)
+    {
+        var (_, content) = store.Read(treeSha, "tree");
+        foreach (var e in Parse(content))
+        {
+            if (e.Mode == ModeDir)
+                FlattenInto(store, e.Sha, prefix + e.Name + "/", acc);
+            else
+                acc[prefix + e.Name] = (e.Mode, e.Sha);
+        }
+    }
 }
