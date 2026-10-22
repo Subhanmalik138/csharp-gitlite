@@ -1,12 +1,16 @@
 // GitLite — a tiny Git-style version control system, built from scratch.
 // Commands are registered here; each later stage adds its own command class.
+using GitLite.Commands;
+
 return GitLiteApp.Run(args);
 
 static class GitLiteApp
 {
     private static readonly Dictionary<string, Func<string[], int>> Commands = new()
     {
-        // Stage 2: ["init"] = InitCommand.Run, ...
+        ["init"] = InitCommand.Run,
+        ["hash-object"] = HashObjectCommand.Run,
+        ["cat-file"] = CatFileCommand.Run,
     };
 
     internal static int Run(string[] args)
